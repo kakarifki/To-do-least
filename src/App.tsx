@@ -3,6 +3,9 @@ import { useState } from 'react'
 // import viteLogo from '/vite.svg'
 import './styles/index.css'
 import HomePage from './components/homepage'
+import { Button } from "@/components/ui/button"
+import Carausell from './components/carausell'
+
 
 function App() {
     const [count, setCount] = useState(0)
@@ -34,6 +37,8 @@ function App() {
             <div>
                 <h1>Jangan lupa oyyy</h1>
             </div>
+            <Button variant="outline">tombol buttton dari shacdn</Button>
+      <Carausell />
         </>
     )
 }

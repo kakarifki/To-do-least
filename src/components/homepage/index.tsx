@@ -5,8 +5,8 @@ const HomePage = () => {
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
             <div className="flex bg-white p-6 rounded-lg shadow-md">
                 <div className="flex flex-col justify-center mr-6">
-                    <h1 className="text-2xl font-bold mb-2">Name: Rifki Septiawan</h1>
-                    <p className="text-lg">Job: Software Eng</p>
+                    <h1 className="text-2xl font-bold mb-2">Rifki Septiawan</h1>
+                    <p className="text-lg">Software Eng</p>
                 </div>
                 <div>
                     <img 
