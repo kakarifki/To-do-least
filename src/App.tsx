@@ -8,7 +8,7 @@ import Carausell from './components/carausell'
 
 
 function App() {
-    const [count, setCount] = useState(0)
+    // const [count, setCount] = useState(0)
 
     return (
         <>
