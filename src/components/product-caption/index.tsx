@@ -1,7 +1,5 @@
 const ProductCaption = () => {
-  return (
-    <p>Garpu</p>
-  )
+    return <p>Garpu</p>
 }
 
 export default ProductCaption
