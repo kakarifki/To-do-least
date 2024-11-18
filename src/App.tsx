@@ -11,6 +11,9 @@ function App() {
         {/* Top-bar start */}
         <TopBar />
         {/* Top-bar End */}
+        {/* New-task start */}
+      <NewTask />
+      {/* New-task End */}
         {/* List-tasks start */}
         <ListTask />
         {/* List-tasks End */}
