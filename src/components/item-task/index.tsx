@@ -1,16 +1,14 @@
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
-import { useTaskContext } from "../../components/task-context";
 
 interface ItemTaskProps {
   id: string;
   taskName: string;
   priority: 'Urgent' | 'Normal' | 'Casual';
+  deleteTask: (id: string) => void;
 }
 
-const ItemTask = ({ id, taskName, priority }: ItemTaskProps) => {
-  const { deleteTask } = useTaskContext();
-
+const ItemTask = ({ id, taskName, priority, deleteTask }: ItemTaskProps) => {
   return (
     <li className='flex justify-between items-center p-4 bg-gray-100 rounded-lg shadow hover:bg-gray-200 transition' id={id}>
       <span>{taskName} ({priority})</span>

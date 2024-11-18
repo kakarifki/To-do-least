@@ -10,8 +10,8 @@ const NewTask = () => {
 
   const handleSubmit = () => {
     if (taskName) {
-      addTask(taskName, priority);
-      setTaskName(''); // Reset input after adding
+      addTask(taskName, priority); // Menambahkan task baru ke context
+      setTaskName(''); // Reset input setelah menambahkan
     }
   };
 

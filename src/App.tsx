@@ -1,27 +1,18 @@
-import './styles/index.css'
-import TopBar from './components/top-bar'
-import ListTask from './components/list-tasks'
-import NewTask from './components/new-task'
-
+import TaskList from './components/list-tasks';
+import TopBar from './components/top-bar';
+import NewTask from './components/new-task';
+import { TaskProvider } from './components/task-context';
 
 function App() {
-    // const [count, setCount] = useState(0)
-
-    return (
-        <>
-        {/* Top-bar start */}
+  return (
+    <TaskProvider>
+      <div className="App">
         <TopBar />
-        {/* Top-bar End */}
-        {/* New-task start */}
-      <NewTask/>
-      {/* New-task End */}
-        {/* List-tasks start */}
-        <ListTask />
-        {/* List-tasks End */}
-
-
-        </>
-    )
+        <NewTask />
+        <TaskList />
+      </div>
+    </TaskProvider>
+  );
 }
 
-export default App
+export default App;

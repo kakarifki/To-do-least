@@ -6,12 +6,6 @@ interface Task {
   priority: 'Urgent' | 'Normal' | 'Casual';
 }
 
-interface TaskContextProps {
-  tasks: Task[];
-  addTask: (name: string, priority: 'Urgent' | 'Normal' | 'Casual') => void;
-  deleteTask: (id: string) => void;
-}
-
 const initialTasks: Task[] = [
   { id: '1', nameTodo: 'Task 1', priority: 'Normal' },
   { id: '2', nameTodo: 'Task 2', priority: 'Urgent' },
@@ -20,22 +14,28 @@ const initialTasks: Task[] = [
   { id: '5', nameTodo: 'Task 5', priority: 'Urgent' },
 ];
 
-const TaskContext = createContext<TaskContextProps | undefined>(undefined);
+interface TaskContextType {
+  tasks: Task[];
+  addTask: (taskName: string, priority: 'Urgent' | 'Normal' | 'Casual') => void;
+  deleteTask: (id: string) => void;
+}
+
+const TaskContext = createContext<TaskContextType | undefined>(undefined);
 
 export const TaskProvider = ({ children }: { children: ReactNode }) => {
   const [tasks, setTasks] = useState<Task[]>(initialTasks);
 
-  const addTask = (name: string, priority: 'Urgent' | 'Normal' | 'Casual') => {
+  const addTask = (taskName: string, priority: 'Urgent' | 'Normal' | 'Casual') => {
     const newTask: Task = {
-      id: (tasks.length + 1).toString(),
-      nameTodo: name,
-      priority,
+      id: Date.now().toString(), // ID unik menggunakan timestamp
+      nameTodo: taskName,
+      priority: priority,
     };
-    setTasks([...tasks, newTask]);
+    setTasks((prevTasks) => [...prevTasks, newTask]);
   };
 
   const deleteTask = (id: string) => {
-    setTasks(tasks.filter(task => task.id !== id));
+    setTasks((prevTasks) => prevTasks.filter((task) => task.id !== id));
   };
 
   return (
@@ -45,7 +45,7 @@ export const TaskProvider = ({ children }: { children: ReactNode }) => {
   );
 };
 
-export const useTaskContext = () => {
+export const useTaskContext = (): TaskContextType => {
   const context = useContext(TaskContext);
   if (!context) {
     throw new Error('useTaskContext must be used within a TaskProvider');
