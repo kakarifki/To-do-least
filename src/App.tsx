@@ -1,6 +1,7 @@
 import './styles/index.css'
 import TopBar from './components/top-bar'
 import ListTask from './components/list-tasks'
+import NewTask from './components/new-task'
 
 
 function App() {
@@ -12,7 +13,7 @@ function App() {
         <TopBar />
         {/* Top-bar End */}
         {/* New-task start */}
-      <NewTask />
+      <NewTask/>
       {/* New-task End */}
         {/* List-tasks start */}
         <ListTask />
