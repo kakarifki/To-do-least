@@ -22,7 +22,6 @@
 - [ ] Delete task
 
 ### 4. Styling
-- [ ] Apply Tailwind CSS styles
 - [ ] Ensure responsive design
 
 ### 5. Testing
