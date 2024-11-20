@@ -1,25 +1,29 @@
-import ItemTask from "../item-task";
-import { useTaskContext } from "../../components/task-context";
+import ItemTask from '../item-task';
 
-const ListTask = () => {
-  const { tasks, deleteTask } = useTaskContext(); // Ambil tasks dan deleteTask dari context
+interface Task {
+  id: string;
+  nameTodo: string;
+  details: string;
+  dueDate: string;
+  category: string;
+}
 
+interface TaskListProps {
+  tasks: Task[];
+  deleteTask: (id: string) => void;
+}
+
+const TaskList = ({ tasks, deleteTask }: TaskListProps) => {
   return (
-    <div className='container mx-auto mt-4'>
-      <h2 className='flex justify-center text-xl font-semibold text-gray-700'>Task List</h2>
-      <ul className='flex flex-col gap-4 mt-4'>
-        {tasks.map(task => (
-          <ItemTask
-            key={task.id}
-            id={task.id}
-            taskName={task.nameTodo}
-            priority={task.priority}
-            deleteTask={deleteTask} // Pass deleteTask ke ItemTask
-          />
+    <div className="container mx-auto p-4">
+      <h2 className="text-lg font-semibold mb-2">Task List</h2>
+      <div className="grid grid-cols-1 gap-4">
+        {tasks.map((task) => (
+          <ItemTask key={task.id} task={task} deleteTask={deleteTask} />
         ))}
-      </ul>
+      </div>
     </div>
   );
 };
 
-export default ListTask;
+export default TaskList;

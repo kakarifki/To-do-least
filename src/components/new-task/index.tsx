@@ -1,42 +1,42 @@
-import { useState } from 'react';
-import { useTaskContext } from '../../components/task-context.tsx';
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
+import { useForm } from 'react-hook-form';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
 
-const NewTask = () => {
-  const { addTask } = useTaskContext();
-  const [taskName, setTaskName] = useState('');
-  const [priority, setPriority] = useState<'Urgent' | 'Normal' | 'Casual'>('Normal');
+interface TaskForm {
+  taskName: string;
+  details: string;
+  dueDate: string;
+  category: string;
+}
 
-  const handleSubmit = () => {
-    if (taskName) {
-      addTask(taskName, priority); // Menambahkan task baru ke context
-      setTaskName(''); // Reset input setelah menambahkan
-    }
+interface NewTaskProps {
+  addTask: (nameTodo: string, details: string, dueDate: string, category: string) => void;
+}
+
+const NewTask = ({ addTask }: NewTaskProps) => {
+  const { register, handleSubmit, reset } = useForm<TaskForm>();
+
+  const onSubmit = (data: TaskForm) => {
+    addTask(data.taskName, data.details, data.dueDate, data.category);
+    reset();
   };
 
   return (
-    <div className='container mx-auto p-4'>
-      <h2 className='text-lg font-semibold mb-2'>Add New Task</h2>
-      <div className='flex flex-col gap-2'>
-        <Input
-          placeholder='Task Name'
-          value={taskName}
-          onChange={(e) => setTaskName(e.target.value)}
-        />
-        <select
-          value={priority}
-          onChange={(e) => setPriority(e.target.value as 'Urgent' | 'Normal' | 'Casual')}
-          className='border rounded p-2'
-        >
-          <option value='Urgent'>Urgent</option>
-          <option value='Normal'>Normal</option>
-          <option value='Casual'>Casual</option>
+    <div className="container mx-auto p-4">
+      <h2 className="text-lg font-semibold mb-2">Add New Task</h2>
+      <form className="flex flex-col gap-2" onSubmit={handleSubmit(onSubmit)}>
+        <Input placeholder="Task Name" {...register('taskName')} />
+        <Input placeholder="Task Details" {...register('details')} />
+        <Input type="date" {...register('dueDate')} />
+        <select className="border rounded p-2" {...register('category')}>
+          <option value="Work">Work</option>
+          <option value="Home">Home</option>
+          <option value="Hobby">Hobby</option>
         </select>
-        <Button onClick={handleSubmit} variant='outline' className='bg-blue-600 text-white'>
+        <Button type="submit" variant="outline" className="bg-blue-600 text-white">
           Submit
         </Button>
-      </div>
+      </form>
     </div>
   );
 };

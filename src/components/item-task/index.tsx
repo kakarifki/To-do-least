@@ -1,23 +1,30 @@
-import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
+interface Task {
+  id: string;
+  nameTodo: string;
+  details: string;
+  dueDate: string;
+  category: string;
+}
 
 interface ItemTaskProps {
-  id: string;
-  taskName: string;
-  priority: 'Urgent' | 'Normal' | 'Casual';
+  task: Task;
   deleteTask: (id: string) => void;
 }
 
-const ItemTask = ({ id, taskName, priority, deleteTask }: ItemTaskProps) => {
+const ItemTask = ({ task, deleteTask }: ItemTaskProps) => {
   return (
-    <li className='flex justify-between items-center p-4 bg-gray-100 rounded-lg shadow hover:bg-gray-200 transition' id={id}>
-      <span>{taskName} ({priority})</span>
-      <Checkbox />
-      <Button variant="secondary" className='hover:bg-blue-500'>Edit Task</Button>
-      <Button onClick={() => deleteTask(id)} variant="destructive" className='hover:bg-red-600'>
-        Delete Task
-      </Button>
-    </li>
+    <div className="bg-white p-4 rounded shadow-md flex flex-col gap-1">
+      <h3 className="text-xl font-semibold">{task.nameTodo}</h3>
+      <p className="text-sm text-gray-600">{task.details}</p>
+      <p className="text-xs text-gray-500">{task.dueDate}</p>
+      <p className="text-xs text-gray-500">{task.category}</p>
+      <button
+        className="mt-2 bg-red-500 text-white py-1 px-2 rounded"
+        onClick={() => deleteTask(task.id)}
+      >
+        Delete
+      </button>
+    </div>
   );
 };
 
