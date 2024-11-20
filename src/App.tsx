@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import TaskList from './components/list-tasks';
 import TopBar from './components/top-bar';
-import NewTask from './components/new-task';
 import { initialTasks } from './data/initialTasks';
 
 function App() {
@@ -24,8 +23,7 @@ function App() {
 
   return (
     <div className="App">
-      <TopBar />
-      <NewTask addTask={addTask} />
+      <TopBar  addTask={addTask} />
       <TaskList tasks={tasks} deleteTask={deleteTask} />
     </div>
   );
