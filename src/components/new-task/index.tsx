@@ -3,6 +3,7 @@ import { ErrorMessage } from "@hookform/error-message"
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 
+
 interface TaskForm {
   taskName: string;
   details: string;
@@ -21,7 +22,9 @@ const NewTask = ({ addTask }: NewTaskProps) => {
     addTask(data.taskName, data.details, data.dueDate, data.category);
     reset();
   };
-
+  
+  console.log('errors', errors);
+  
   return (
     <div className="container mx-auto p-4">
       <h2 className="text-lg font-semibold mb-2">Add New Task</h2>
@@ -41,12 +44,7 @@ const NewTask = ({ addTask }: NewTaskProps) => {
           <ErrorMessage
         errors={errors}
         name="details"
-        render={({ messages }) =>
-          messages &&
-          Object.entries(messages).map(([type, message]) => (
-            <p key={type}>{message}</p>
-          ))
-        }
+        render={({ message }) => <p className='bg-red-400'>{message}</p>}
       />
         <Input type="date" {...register('dueDate')} />
         <select className="border rounded p-2" {...register('category')}>
