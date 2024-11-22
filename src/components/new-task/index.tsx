@@ -2,6 +2,8 @@ import { useForm } from 'react-hook-form';
 import { ErrorMessage } from "@hookform/error-message"
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
+import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from "@/components/ui/select";
+
 
 
 interface TaskForm {
@@ -16,7 +18,7 @@ interface NewTaskProps {
 }
 
 const NewTask = ({ addTask }: NewTaskProps) => {
-  const { register, formState: { errors }, handleSubmit, reset } = useForm<TaskForm>();
+  const { register, formState: { errors }, handleSubmit, reset, setValue } = useForm<TaskForm>();
 
   const onSubmit = (data: TaskForm) => {
     addTask(data.taskName, data.details, data.dueDate, data.category);
@@ -47,11 +49,20 @@ const NewTask = ({ addTask }: NewTaskProps) => {
         render={({ message }) => <p className='bg-red-400'>{message}</p>}
       />
         <Input type="date" {...register('dueDate')} />
-        <select className="border rounded p-2" {...register('category')}>
-          <option value="Work">Work</option>
-          <option value="Home">Home</option>
-          <option value="Hobby">Hobby</option>
-        </select>
+        {/* Select with shadcn start*/}
+        <Select
+          onValueChange={(value) => setValue('category', value)}
+        >
+          <SelectTrigger className="border rounded p-2">
+            <SelectValue placeholder="Select Category" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="Work">Work</SelectItem>
+            <SelectItem value="Home">Home</SelectItem>
+            <SelectItem value="Hobby">Hobby</SelectItem>
+          </SelectContent>
+        </Select>
+        {/* Select with shadcn end*/}
         <Button type="submit" variant="outline" className="bg-blue-600 text-white">
           Submit
         </Button>
