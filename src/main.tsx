@@ -25,11 +25,6 @@ const router = createBrowserRouter([
     path: "/faq",
     element: <Faq />,
   },
-  // {
-  //   path: "/",
-  //   element: <App />,
-    
-  // },
 ]);
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
