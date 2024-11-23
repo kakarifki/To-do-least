@@ -1,4 +1,3 @@
-// src/components/top-bar/index.tsx
 import { useState } from 'react';
 import Modal from 'react-modal';
 import NewTask from '../new-task';

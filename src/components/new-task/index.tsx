@@ -25,7 +25,6 @@ const NewTask = ({ addTask }: NewTaskProps) => {
     reset();
   };
   
-  console.log('errors', errors);
   
   return (
     <div className="container mx-auto p-4">
