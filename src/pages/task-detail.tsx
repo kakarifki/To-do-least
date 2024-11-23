@@ -1,62 +1,82 @@
-import { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import { Task } from '../data/initialTasks';
-import { fetchTaskById } from "@/utils/fetch-data"; // Buat fungsi ini pada utils/fetch-data.ts
+// src/pages/task-detail.tsx
+import { FC } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+// import { Task } from '@/data/initialTasks';
+import { useTasks } from '@/context/task-context';
 import { Button } from '@/components/ui/button';
 
-interface TaskDetailProps {
-  deleteTask: (id: string) => void;
-  handleEditTaskStatus: (id: string, status: 'todo' | 'progress' | 'done') => void;
-}
-
-const TaskDetail = ({ deleteTask, handleEditTaskStatus }: TaskDetailProps) => {
-  const { id } = useParams<{ id: string }>();
-  const [task, setTask] = useState<Task | null>(null);
+const TaskDetail: FC = () => {
   const navigate = useNavigate();
+  const { id } = useParams<{ id: string }>();
+  const { tasks, deleteTask, handleEditTaskStatus } = useTasks();
+  const selectedTask = tasks.find(task => task.id === id);
 
-  useEffect(() => {
-    if (id) {
-      const fetchedTask = fetchTaskById(id);
-      setTask(fetchedTask);
-    }
-  }, [id]);
-
-  const handleEditTask = (newStatus: 'todo' | 'progress' | 'done') => {
-    if (task) {
-      handleEditTaskStatus(task.id, newStatus);
+  const handleDelete = () => {
+    if (selectedTask) {
+      deleteTask(selectedTask.id);
       navigate('/');
     }
   };
 
+  const handleProgress = () => {
+    if (selectedTask) {
+      handleEditTaskStatus(selectedTask.id, 'progress');
+      navigate('/');
+    }
+  };
+
+  const handleDone = () => {
+    if (selectedTask) {
+      handleEditTaskStatus(selectedTask.id, 'done');
+      navigate('/');
+    }
+  };
+
+  if (!selectedTask) {
+    return <div>Task not found</div>;
+  }
+
   return (
-    task ? (
-      <div className="container mx-auto p-4">
-        <h2 className="text-2xl font-bold mb-4">{task.nameTodo}</h2>
-        <p className="text-lg mb-2">{task.details}</p>
-        <div className="flex mb-2">
-          <span className="font-semibold">Due Date:</span> <span>{task.dueDate}</span>
-        </div>
-        <div className="flex mb-2">
-          <span className="font-semibold">Category:</span> <span>{task.category}</span>
-        </div>
-        <div className="flex mb-2">
-          <span className="font-semibold">Status:</span> <span>{task.status}</span>
-        </div>
-        <div className="flex space-x-2">
-          <Button variant="outline" className="bg-blue-600 text-white" onClick={() => handleEditTask('progress')}>
-            Progress
-          </Button>
-          <Button variant="outline" className="bg-green-600 text-white" onClick={() => handleEditTask('done')}>
-            Done
-          </Button>
-          <Button variant="outline" className="bg-red-600 text-white" onClick={() => deleteTask(task.id)}>
-            Delete
-          </Button>
-        </div>
+    <div className="container mx-auto p-4">
+      <h2 className="text-lg font-semibold mb-2">Task Detail</h2>
+      <div className="bg-white p-4 rounded shadow-md mb-4">
+        <h3 className="text-xl font-semibold mb-2">
+          {selectedTask.nameTodo}
+        </h3>
+        <p className="text-sm text-gray-600 mb-2">
+          {selectedTask.details}
+        </p>
+        <p className="text-xs text-gray-500 mb-2">
+          Due Date: {selectedTask.dueDate}
+        </p>
+        <p className="text-xs text-gray-500">
+          Category: {selectedTask.category}
+        </p>
       </div>
-    ) : (
-      <p>Loading...</p>
-    )
+      <div className="flex gap-2">
+        <Button
+          variant="outline"
+          className="bg-zinc-900 text-zinc-50 shadow hover:bg-zinc-900/90 dark:bg-zinc-50 dark:text-zinc-900 dark:hover:bg-zinc-50/90"
+          onClick={handleProgress}
+        >
+          Progress
+        </Button>
+        <Button
+          variant="outline"
+          className="bg-zinc-900 text-zinc-50 shadow hover:bg-zinc-900/90 dark:bg-zinc-50 dark:text-zinc-900 dark:hover:bg-zinc-50/90"
+          onClick={handleDone}
+        >
+          Done
+        </Button>
+        <Button
+          variant="outline"
+          className="bg-red-500 text-zinc-50 shadow hover:bg-red-500/90 dark:bg-zinc-50 dark:text-zinc-900 dark:hover:bg-zinc-50/90"
+          onClick={handleDelete}
+        >
+          Delete
+        </Button>
+      </div>
+    </div>
   );
 };
 

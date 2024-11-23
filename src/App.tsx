@@ -1,52 +1,48 @@
-import { useState } from 'react';
+// src/App.tsx
+import { FC } from 'react';
 import TaskList from './components/list-tasks';
 import TopBar from './components/top-bar';
-import { initialTasks } from './data/initialTasks';
-import { Task } from './data/initialTasks';
-import { useNavigate } from 'react-router-dom';
+import { Task } from '@/data/initialTasks';
+import { useTasks } from '@/context/task-context';
 
-function App() {
-  const [tasks, setTasks] = useState<Task[]>(() => {
-    const storedTasks = localStorage.getItem('tasks');
-    return storedTasks ? JSON.parse(storedTasks) : initialTasks;
-  });
-  const navigate = useNavigate();
+const App: FC = () => {
+  const { tasks, addTask, deleteTask, handleEditTaskStatus } = useTasks();
 
-  const addTask = (nameTodo: string, details: string, dueDate: string, category: string) => {
-    const newTask = {
-      id: Date.now().toString(),
-      nameTodo,
-      details,
-      dueDate,
-      category,
-      status: 'todo' as 'todo' | 'progress' | 'done',
-    };
-    setTasks(prevTasks => [...prevTasks, newTask]);
-    localStorage.setItem('tasks', JSON.stringify([...tasks, newTask]));
-  };
-
-  const deleteTask = (id: string) => {
-    const updatedTasks = tasks.filter(task => task.id !== id);
-    setTasks(updatedTasks);
-    localStorage.setItem('tasks', JSON.stringify(updatedTasks));
-  };
-
-  const handleEditTaskStatus = (id: string, status: 'todo' | 'progress' | 'done') => {
-    const updatedTasks = tasks.map(task =>
-      task.id === id ? { ...task, status } : task
-    );
-    setTasks(updatedTasks);
-    localStorage.setItem('tasks', JSON.stringify(updatedTasks));
-  };
-
-  const handleTaskClick = (task: Task) => {
-    navigate(`/task-detail/${task.id}`);
-  };
+  const filteredTasks = (status: Task['status']) => tasks.filter(task => task.status === status);
 
   return (
-    <div className="App">
-      <TopBar addTask={addTask} />
-      <TaskList tasks={tasks} deleteTask={deleteTask} handleEditTaskStatus={handleEditTaskStatus} onTaskClick={handleTaskClick} />
+    <div className="App flex">
+      <div className="sidebar w-1/4 bg-zinc-50 p-4">
+        <h2 className="text-lg font-semibold mb-2">Name</h2>
+        <p>To-Do-Least</p>
+        <h2 className="text-lg font-semibold mt-4 mb-2">Due Today</h2>
+        <h2 className="text-lg font-semibold mt-4 mb-2">Due Yesterday</h2>
+        <h2 className="text-lg font-semibold mt-4 mb-2">Due Tomorrow</h2>
+        <h2 className="text-lg font-semibold mt-4 mb-2">Category</h2>
+        <ul className="list-disc pl-4">
+          <li>Work</li>
+          <li>Home</li>
+          <li>Hobby</li>
+        </ul>
+      </div>
+      <div className="main w-3/4">
+        <TopBar addTask={addTask} />
+        <TaskList 
+          tasks={filteredTasks('todo')} 
+          deleteTask={deleteTask} 
+          handleEditTaskStatus={handleEditTaskStatus}
+        />
+        <TaskList 
+          tasks={filteredTasks('progress')} 
+          deleteTask={deleteTask} 
+          handleEditTaskStatus={handleEditTaskStatus}
+        />
+        <TaskList 
+          tasks={filteredTasks('done')} 
+          deleteTask={deleteTask} 
+          handleEditTaskStatus={handleEditTaskStatus}
+        />
+      </div>
     </div>
   );
 }
