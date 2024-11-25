@@ -1,4 +1,5 @@
 import { useRouteError } from "react-router-dom";
+import Layout from '@/components/common/layout';
 
 interface ErrorWithMessage {
   message?: string;
@@ -25,15 +26,16 @@ export default function ErrorPage() {
   } else {
     // Fallback jika tipe error tidak dikenal
     message = "An unknown error occurred";
-
   }
   return (
-    <div id="error-page">
-      <h1>Oops!</h1>
-      <p>Sorry, an unexpected error has occurred.</p>
-      <p>
-        <i>{message}</i>
-      </p>
-    </div>
+    <Layout>
+      <div id="error-page">
+        <h1>Oops!</h1>
+        <p>Sorry, an unexpected error has occurred.</p>
+        <p>
+          <i>{message}</i>
+        </p>
+      </div>
+    </Layout>
   );
 }

@@ -10,6 +10,7 @@ import TaskDetail from './pages/task-detail';
 import NewTask from './pages/new-task';
 import { TaskProvider } from './context/task-context';
 
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -37,7 +38,7 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <TaskProvider>
-      <RouterProvider router={router} />
+        <RouterProvider router={router} />
     </TaskProvider>
   </React.StrictMode>
 );

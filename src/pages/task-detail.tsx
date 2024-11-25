@@ -1,9 +1,8 @@
-// src/pages/task-detail.tsx
 import { FC } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-// import { Task } from '@/data/initialTasks';
 import { useTasks } from '@/context/task-context';
 import { Button } from '@/components/ui/button';
+import Layout from '@/components/common/layout';
 
 const TaskDetail: FC = () => {
   const navigate = useNavigate();
@@ -80,4 +79,4 @@ const TaskDetail: FC = () => {
   );
 };
 
-export default TaskDetail;
+export default () => <Layout><TaskDetail /></Layout>;
