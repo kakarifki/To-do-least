@@ -1,4 +1,3 @@
-// src/main.tsx
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
@@ -8,7 +7,8 @@ import About from './pages/about';
 import Faq from './pages/faq';
 import ErrorPage from "./pages/error-page";
 import TaskDetail from './pages/task-detail';
-import { TaskProvider } from '@/context/task-context';
+import NewTask from './pages/new-task';
+import { TaskProvider } from './context/task-context';
 
 const router = createBrowserRouter([
   {
@@ -27,6 +27,10 @@ const router = createBrowserRouter([
   {
     path: "/task/:id",
     element: <TaskDetail />,
+  },
+  {
+    path: "/new-task",
+    element: <NewTask />,
   },
 ]);
 

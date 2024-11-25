@@ -1,8 +1,6 @@
-// src/components/task-list/index.tsx
 import { FC } from 'react';
 import { Task } from '@/data/initialTasks';
 import ItemTask from '../item-task';
-// import { Button } from '@/components/ui/button';
 
 interface TaskListProps {
   tasks: Task[];

@@ -1,12 +1,11 @@
-// src/App.tsx
 import { FC } from 'react';
 import TaskList from './components/list-tasks';
 import TopBar from './components/top-bar';
 import { Task } from '@/data/initialTasks';
-import { useTasks } from '@/context/task-context';
+import { useTasks } from './context/task-context';
 
 const App: FC = () => {
-  const { tasks, addTask, deleteTask, handleEditTaskStatus } = useTasks();
+  const { tasks, deleteTask, handleEditTaskStatus } = useTasks();
 
   const filteredTasks = (status: Task['status']) => tasks.filter(task => task.status === status);
 
@@ -26,7 +25,7 @@ const App: FC = () => {
         </ul>
       </div>
       <div className="main w-3/4">
-        <TopBar addTask={addTask} />
+        <TopBar />
         <TaskList 
           tasks={filteredTasks('todo')} 
           deleteTask={deleteTask} 
