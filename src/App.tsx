@@ -1,8 +1,8 @@
 import { FC } from 'react';
 import TaskList from './components/list-tasks';
-import { Task } from '@/data/initialTasks';
+import { Task } from './data/initialTasks';
 import { useTasks } from './context/task-context';
-import Layout from '@/components/common/layout';
+import Layout from './components/common/layout';
 
 const App: FC = () => {
   const { tasks, deleteTask, handleEditTaskStatus } = useTasks();
@@ -26,21 +26,30 @@ const App: FC = () => {
       </div>
       <div className="main w-3/4">
         <Layout>
-        <TaskList 
-          tasks={filteredTasks('todo')} 
-          deleteTask={deleteTask} 
-          handleEditTaskStatus={handleEditTaskStatus}
-        />
-        <TaskList 
-          tasks={filteredTasks('progress')} 
-          deleteTask={deleteTask} 
-          handleEditTaskStatus={handleEditTaskStatus}
-        />
-        <TaskList 
-          tasks={filteredTasks('done')} 
-          deleteTask={deleteTask} 
-          handleEditTaskStatus={handleEditTaskStatus}
-        />
+          <div className="task-column">
+            <h2 className="text-lg font-semibold mb-2">Todo</h2>
+            <TaskList 
+              tasks={filteredTasks('todo')} 
+              deleteTask={deleteTask} 
+              handleEditTaskStatus={handleEditTaskStatus}
+            />
+          </div>
+          <div className="task-column">
+            <h2 className="text-lg font-semibold mb-2">Progress</h2>
+            <TaskList 
+              tasks={filteredTasks('progress')} 
+              deleteTask={deleteTask} 
+              handleEditTaskStatus={handleEditTaskStatus}
+            />
+          </div>
+          <div className="task-column">
+            <h2 className="text-lg font-semibold mb-2">Done</h2>
+            <TaskList 
+              tasks={filteredTasks('done')} 
+              deleteTask={deleteTask} 
+              handleEditTaskStatus={handleEditTaskStatus}
+            />
+          </div>
         </Layout>
       </div>
     </div>

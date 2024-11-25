@@ -36,6 +36,7 @@ const TaskDetail: FC = () => {
   }
 
   return (
+    <Layout>
     <div className="container mx-auto p-4">
       <h2 className="text-lg font-semibold mb-2">Task Detail</h2>
       <div className="bg-white p-4 rounded shadow-md mb-4">
@@ -76,7 +77,8 @@ const TaskDetail: FC = () => {
         </Button>
       </div>
     </div>
+    </Layout>
   );
 };
 
-export default () => <Layout><TaskDetail /></Layout>;
+export default TaskDetail;
