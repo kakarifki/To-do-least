@@ -1,8 +1,8 @@
 import { FC } from 'react';
 import TaskList from './components/list-tasks';
-import TopBar from './components/top-bar';
 import { Task } from '@/data/initialTasks';
 import { useTasks } from './context/task-context';
+import Layout from '@/components/common/layout';
 
 const App: FC = () => {
   const { tasks, deleteTask, handleEditTaskStatus } = useTasks();
@@ -25,7 +25,7 @@ const App: FC = () => {
         </ul>
       </div>
       <div className="main w-3/4">
-        <TopBar />
+        <Layout>
         <TaskList 
           tasks={filteredTasks('todo')} 
           deleteTask={deleteTask} 
@@ -41,6 +41,7 @@ const App: FC = () => {
           deleteTask={deleteTask} 
           handleEditTaskStatus={handleEditTaskStatus}
         />
+        </Layout>
       </div>
     </div>
   );
