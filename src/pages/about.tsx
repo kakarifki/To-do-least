@@ -1,13 +1,13 @@
-import React from 'react';
 import Layout from '@/components/common/layout';
 
 const About = () => {
   return (
-    <div>
+    <>
+    <Layout>
       <h1 className="">About page</h1>
       <p>This is about page</p>
-    </div>
+      </Layout>
+    </>
   );
 };
-
-export default () => <Layout><About /></Layout>;
+export default About;
