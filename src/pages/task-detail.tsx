@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useTasks } from '@/context/task-context';
 import { Button } from '@/components/ui/button';
 import Layout from '@/components/common/layout';
+import { getRemainingDays } from '@/utils/date-utils';
 
 const TaskDetail: FC = () => {
   const navigate = useNavigate();
@@ -200,7 +201,7 @@ const TaskDetail: FC = () => {
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                 </svg>
-                {selectedTask.dueDate}
+                {getRemainingDays(selectedTask.dueDate)}
               </p>
               <p className="text-sm text-gray-500 flex items-center gap-2 bg-gray-50 px-4 py-2 rounded-full">
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
