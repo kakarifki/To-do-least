@@ -1,19 +1,35 @@
 import { FC, ReactNode } from 'react';
+
 import Navbar from '@/components/common/navbar';
-import Footer from '../footer';
+
+import Footer from '@/components/common/footer';
 
 interface LayoutProps {
-  children: ReactNode;
+
+children: ReactNode;
+
 }
 
 const Layout: FC<LayoutProps> = ({ children }) => {
-  return (
-    <div className="min-h-screen">
-      <Navbar />
-      {children}
-      <Footer />
-    </div>
-  );
+
+return (
+
+<div className="h-screen flex flex-col">
+
+<div className="flex-1">
+
+<Navbar />
+
+{children}
+
+</div>
+
+<Footer />
+
+</div>
+
+);
+
 };
 
 export default Layout;
