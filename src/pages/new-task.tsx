@@ -1,10 +1,10 @@
 import { FC } from 'react';
 import { useForm } from 'react-hook-form';
 import { ErrorMessage } from '@hookform/error-message';
-import { Input } from '../components/ui/input';
-import { Button } from '../components/ui/button';
-import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from '../components/ui/select';
-import { useTasks } from '../context/task-context';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
+import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from '@/components/ui/select';
+import { useTasks } from '@/context/task-context';
 import { useNavigate } from 'react-router-dom';
 
 interface TaskForm {
@@ -17,7 +17,7 @@ interface TaskForm {
 const NewTask: FC = () => {
   const { addTask } = useTasks();
   const navigate = useNavigate();
-  const { register, formState: { errors }, handleSubmit, reset, watch } = useForm<TaskForm>();
+  const { register, formState: { errors }, handleSubmit, reset, setValue, watch } = useForm<TaskForm>();
 
   const onSubmit = (data: TaskForm) => {
     console.log('Submitting task data:', data);
@@ -58,8 +58,8 @@ const NewTask: FC = () => {
         <Input type="date" {...register('dueDate')} />
         {/* Select with shadcn start*/}
         <Select
-          onValueChange={(value: string) => {
-            register('category').onChange({ target: { value } });
+          onValueChange={(value) => {
+            setValue('category', value, { shouldValidate: true });
           }}
           value={categoryValue}
         >
@@ -72,6 +72,7 @@ const NewTask: FC = () => {
             <SelectItem value="Hobby">Hobby</SelectItem>
           </SelectContent>
         </Select>
+        <input type="hidden" {...register('category', { required: true })} />
         {/* Select with shadcn end*/}
         <div className="flex gap-2">
           <Button type="submit" variant="outline" className="bg-blue-600 text-white">
