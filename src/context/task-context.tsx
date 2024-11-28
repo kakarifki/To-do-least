@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useEffect } from 'react';
-import { Task, initialTasks } from '../data/initialTasks';
+import { Task, initialTasks } from '@/data/initialTasks';
 
 interface TaskContextType {
   tasks: Task[];
@@ -7,6 +7,7 @@ interface TaskContextType {
   addTask: (nameTodo: string, details: string, dueDate: string, category: string) => void;
   deleteTask: (id: string) => void;
   handleEditTaskStatus: (id: string, newStatus: Task['status']) => void;
+  editTask: (id: string, nameTodo: string, details: string, dueDate: string, category: string) => void;
 }
 
 const TaskContext = createContext<TaskContextType | undefined>(undefined);
@@ -53,8 +54,18 @@ export const TaskProvider = ({ children }: { children: React.ReactNode }) => {
     );
   };
 
+  const editTask = (id: string, nameTodo: string, details: string, dueDate: string, category: string) => {
+    setTasks(prevTasks =>
+      prevTasks.map(task =>
+        task.id === id
+          ? { ...task, nameTodo, details, dueDate, category }
+          : task
+      )
+    );
+  };
+
   return (
-    <TaskContext.Provider value={{ tasks, setTasks, addTask, deleteTask, handleEditTaskStatus }}>
+    <TaskContext.Provider value={{ tasks, setTasks, addTask, deleteTask, handleEditTaskStatus, editTask }}>
       {children}
     </TaskContext.Provider>
   );
