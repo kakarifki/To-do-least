@@ -1,13 +1,10 @@
 import { FC } from 'react';
 import TaskList from './components/list-tasks';
-import { Task } from '@/data/initialTasks';
 import { useTasks } from './context/task-context';
 import Layout from '@/components/common/layout';
 
 const App: FC = () => {
   const { tasks, deleteTask, handleEditTaskStatus } = useTasks();
-
-  const filteredTasks = (status: Task['status']) => tasks.filter(task => task.status === status);
 
   return (
     <div className="App flex">
@@ -26,21 +23,11 @@ const App: FC = () => {
       </div>
       <div className="main w-3/4">
         <Layout>
-        <TaskList 
-          tasks={filteredTasks('todo')} 
-          deleteTask={deleteTask} 
-          handleEditTaskStatus={handleEditTaskStatus}
-        />
-        <TaskList 
-          tasks={filteredTasks('progress')} 
-          deleteTask={deleteTask} 
-          handleEditTaskStatus={handleEditTaskStatus}
-        />
-        <TaskList 
-          tasks={filteredTasks('done')} 
-          deleteTask={deleteTask} 
-          handleEditTaskStatus={handleEditTaskStatus}
-        />
+          <TaskList 
+            tasks={tasks}
+            deleteTask={deleteTask}
+            handleEditTaskStatus={handleEditTaskStatus}
+          />
         </Layout>
       </div>
     </div>
