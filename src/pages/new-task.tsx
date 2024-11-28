@@ -19,6 +19,9 @@ const NewTask: FC = () => {
   const navigate = useNavigate();
   const { register, formState: { errors }, handleSubmit, reset, setValue, watch } = useForm<TaskForm>();
 
+  // Get today's date in YYYY-MM-DD format for the min attribute
+  const today = new Date().toISOString().split('T')[0];
+
   const onSubmit = (data: TaskForm) => {
     console.log('Submitting task data:', data);
     addTask(data.taskName, data.details, data.dueDate, data.category);
@@ -95,8 +98,16 @@ const NewTask: FC = () => {
               <label className="block text-sm font-medium text-gray-700">Due Date</label>
               <Input 
                 type="date" 
+                min={today}
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                {...register('dueDate', { required: 'Due date is required' })} 
+                {...register('dueDate', { 
+                  required: 'Due date is required',
+                  validate: value => {
+                    const selectedDate = new Date(value);
+                    const todayDate = new Date(today);
+                    return selectedDate >= todayDate || 'Cannot select past dates';
+                  }
+                })} 
               />
               <ErrorMessage
                 errors={errors}
