@@ -7,29 +7,25 @@
 - [x] Setup project structure
 
 ### 2. Create Components
-- [ ] TopBar
-- [ ] NewTask
-- [ ] TaskList
-- [ ] TaskItem
-- [ ] TaskDetails
+- [x] TopBar
+- [x] NewTask
+- [x] TaskList
+- [x] TaskItem
+- [x] TaskDetails
 
 ### 3. Implement Features
-- [ ] Add new task
-- [ ] Display tasks from local storage
-- [ ] Move tasks between columns (Todo, Progress, Done)
-- [ ] View task details
-- [ ] Edit task
-- [ ] Delete task
+- [x] Add new task
+- [x] Display tasks from local storage
+- [x] Move tasks between columns (Todo, Progress, Done)
+- [x] View task details
+- [x] Edit task
+- [x] Delete task
 
 ### 4. Styling
 - [ ] Ensure responsive design
 
-### 5. Testing
-- [ ] Perform unit testing
-- [ ] Perform integration testing
-
-### 6. Deployment
-- [ ] Deploy the application to a hosting platform
+### 5. Deployment
+- [x] Deploy the application to a hosting platform
 
 ## Features Overview
 The To-Do List Webapp is a user-friendly tool designed to help users efficiently manage their daily tasks. It offers several key features to enhance task management and productivity:
