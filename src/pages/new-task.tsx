@@ -1,10 +1,10 @@
 import { FC } from 'react';
 import { useForm } from 'react-hook-form';
 import { ErrorMessage } from '@hookform/error-message';
-import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
-import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from '@/components/ui/select';
-import { useTasks } from '@/context/task-context';
+import { Input } from '../components/ui/input';
+import { Button } from '../components/ui/button';
+import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from '../components/ui/select';
+import { useTasks } from '../context/task-context';
 import { useNavigate } from 'react-router-dom';
 
 interface TaskForm {
@@ -17,9 +17,10 @@ interface TaskForm {
 const NewTask: FC = () => {
   const { addTask } = useTasks();
   const navigate = useNavigate();
-  const { register, formState: { errors }, handleSubmit, reset } = useForm<TaskForm>();
+  const { register, formState: { errors }, handleSubmit, reset, watch } = useForm<TaskForm>();
 
   const onSubmit = (data: TaskForm) => {
+    console.log('Submitting task data:', data);
     addTask(data.taskName, data.details, data.dueDate, data.category);
     reset();
     navigate('/');
@@ -29,6 +30,8 @@ const NewTask: FC = () => {
     reset();
     navigate('/');
   };
+
+  const categoryValue = watch('category');
 
   return (
     <div className="container mx-auto p-4">
@@ -55,7 +58,10 @@ const NewTask: FC = () => {
         <Input type="date" {...register('dueDate')} />
         {/* Select with shadcn start*/}
         <Select
-          onValueChange={(value: string) => register('category').onChange({ target: { value } })}
+          onValueChange={(value: string) => {
+            register('category').onChange({ target: { value } });
+          }}
+          value={categoryValue}
         >
           <SelectTrigger className="border rounded p-2">
             <SelectValue placeholder="Select Category" />

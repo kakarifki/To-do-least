@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useEffect } from 'react';
-import { Task, initialTasks } from '@/data/initialTasks';
+import { Task, initialTasks } from '../data/initialTasks';
 
 interface TaskContextType {
   tasks: Task[];
@@ -12,17 +12,20 @@ interface TaskContextType {
 const TaskContext = createContext<TaskContextType | undefined>(undefined);
 
 export const TaskProvider = ({ children }: { children: React.ReactNode }) => {
-  const [tasks, setTasks] = useState<Task[]>(initialTasks);
-
-  useEffect(() => {
+  // Get initial data from localStorage or fall back to initialTasks
+  const getInitialTasks = () => {
     const storedTasks = localStorage.getItem('tasks');
     if (storedTasks) {
-      const parsedTasks: Task[] = JSON.parse(storedTasks);
-      setTasks(parsedTasks);
+      return JSON.parse(storedTasks);
     }
-  }, []);
+    return initialTasks;
+  };
 
+  const [tasks, setTasks] = useState<Task[]>(getInitialTasks());
+
+  // Save to localStorage whenever tasks change
   useEffect(() => {
+    console.log('Saving tasks to localStorage:', tasks);
     localStorage.setItem('tasks', JSON.stringify(tasks));
   }, [tasks]);
 
