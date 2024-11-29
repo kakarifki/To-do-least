@@ -68,6 +68,4 @@ Below is a detailed task list for implementing each core feature:
 
 This to-do list app is designed with simplicity and productivity in mind, providing users with essential tools for task management in a modern web environment.
 
-## Update
-This project is going to use zod or react hooks form
 
