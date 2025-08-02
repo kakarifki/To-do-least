@@ -23,7 +23,7 @@ const Footer: FC = () => {
           </div>
 
           <div className="flex flex-col sm:flex-row items-center gap-4 text-white text-sm sm:text-base">
-            <p>© 2024 KakaRifki. All rights reserved.</p>
+            <p>© {new Date().getFullYear()} KakaRifki. All rights reserved.</p>
 
             <div className="flex gap-2">
               <a
