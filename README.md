@@ -1,32 +1,5 @@
 # To-Do List Webapp
 
-## To-Do-Least Project Roadmap
-
-### 1. Setup Project
-- [x] Install dependencies (React, TypeScript, Tailwind, etc.)
-- [x] Setup project structure
-
-### 2. Create Components
-- [x] TopBar
-- [x] NewTask
-- [x] TaskList
-- [x] TaskItem
-- [x] TaskDetails
-
-### 3. Implement Features
-- [x] Add new task
-- [x] Display tasks from local storage
-- [x] Move tasks between columns (Todo, Progress, Done)
-- [x] View task details
-- [x] Edit task
-- [x] Delete task
-
-### 4. Styling
-- [ ] Ensure responsive design
-
-### 5. Deployment
-- [x] Deploy the application to a hosting platform
-
 ## Features Overview
 The To-Do List Webapp is a user-friendly tool designed to help users efficiently manage their daily tasks. It offers several key features to enhance task management and productivity:
 
@@ -37,7 +10,6 @@ The To-Do List Webapp is a user-friendly tool designed to help users efficiently
 5. **Dynamic User Interface**: Responsive design with an intuitive user experience.
 
 ## Task-List for Implementation
-Below is a detailed task list for implementing each core feature:
 
 ### 1. Task Creation
 - **Implement input form for task details**
