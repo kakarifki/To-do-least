@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useState, useEffect } from 'react';
 
 
 type FilterType = 'all' | 'today' | 'yesterday' | 'tomorrow' | 'work' | 'home' | 'hobby';
@@ -10,6 +10,59 @@ interface SidebarProps {
   searchQuery: string;
   filteredTasksCount: number;
 }
+
+// Name input component with localStorage functionality
+const NameInput: FC = () => {
+  const [name, setName] = useState<string>('');
+  const [isEditing, setIsEditing] = useState<boolean>(false);
+
+  // Load name from localStorage on component mount
+  useEffect(() => {
+    const savedName = localStorage.getItem('userName');
+    if (savedName) {
+      setName(savedName);
+    }
+  }, []);
+
+  // Save name to localStorage when it changes
+  const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newName = e.target.value;
+    setName(newName);
+    localStorage.setItem('userName', newName);
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      setIsEditing(false);
+    }
+  };
+
+  return (
+    <div className="flex items-center">
+      {isEditing ? (
+        <input
+          type="text"
+          value={name}
+          onChange={handleNameChange}
+          onBlur={() => setIsEditing(false)}
+          onKeyDown={handleKeyDown}
+          autoFocus
+          className="text-2xl font-bold text-gray-800 bg-transparent border-b border-gray-300 focus:outline-none focus:border-blue-500 w-full"
+          placeholder="Enter your name"
+        />
+      ) : (
+        <h2 
+          className="text-2xl font-bold text-gray-800 cursor-pointer"
+          onClick={() => setIsEditing(true)}
+        >
+          {name ? `Hi, ${name}!` : (
+            <span className="italic text-gray-400">Enter your name</span>
+          )}
+        </h2>
+      )}
+    </div>
+  );
+};
 
 const Sidebar: FC<SidebarProps> = ({
   onFilterChange,
@@ -29,7 +82,7 @@ const Sidebar: FC<SidebarProps> = ({
   return (
     <div className="sidebar w-full bg-white border-r border-gray-100 p-6 space-y-6">
       <div className="space-y-1">
-        <h2 className="text-2xl font-bold text-gray-800">Hi!</h2>
+        <NameInput />
         <p className="text-gray-600">To-Do-Least</p>
       </div>
 
