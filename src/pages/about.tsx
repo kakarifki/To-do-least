@@ -4,13 +4,13 @@ import React from 'react';
 const About: React.FC = () => {
   return (
     <Layout>
-    <div className="p-8">
-      <h1 className="text-3xl font-bold mb-4">About To-Do List Webapp</h1>
-      <p className="mb-6">
+    <div className="p-4 sm:p-6 md:p-8">
+      <h1 className="text-2xl sm:text-3xl font-bold mb-3 sm:mb-4">About To-Do List Webapp</h1>
+      <p className="text-sm sm:text-base mb-4 sm:mb-6">
         The To-Do List Webapp is a user-friendly tool designed to help users efficiently manage their daily tasks. It offers several key features to enhance task management and productivity. The application is built using React, TypeScript, and Tailwind CSS, ensuring a responsive and intuitive user experience.
       </p>
-      <h2 className="text-2xl font-bold mb-4">Features</h2>
-      <ul className="list-disc pl-8">
+      <h2 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4">Features</h2>
+      <ul className="list-disc pl-5 sm:pl-8 text-sm sm:text-base">
         <li className="mb-2">Task Creation: Users can add new tasks to their to-do list with ease.</li>
         <li className="mb-2">Task Editing: Modify existing tasks to keep your list up-to-date.</li>
         <li className="mb-2">Task Deletion: Remove completed or unwanted tasks.</li>

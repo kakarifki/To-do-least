@@ -44,8 +44,8 @@ const App: FC = () => {
 
 
   return (
-    <div className="App flex min-h-screen">
-      <div className="w-1/4">
+    <div className="App flex flex-col md:flex-row min-h-screen">
+      <div className="w-full md:w-1/4 md:sticky md:top-0 md:h-screen">
         <Sidebar
           onFilterChange={setActiveFilter}
           onSearchChange={setSearchQuery}
@@ -54,7 +54,7 @@ const App: FC = () => {
           filteredTasksCount={filteredTasks.length}
         />
       </div>
-      <div className="main w-3/4 bg-gray-50">
+      <div className="main w-full md:w-3/4 bg-gray-50">
         <Layout>
           <TaskList 
             tasks={filteredTasks}

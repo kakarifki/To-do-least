@@ -25,10 +25,10 @@ export default function ErrorPage() {
   }
   return (
     <Layout>
-      <div id="error-page" className="container mx-auto p-4">
-        <h1 className="text-3xl font-bold mb-4">Oops!</h1>
-        <p className="text-lg mb-4">Sorry, an unexpected error has occurred.</p>
-        <p className="text-lg italic">
+      <div id="error-page" className="container mx-auto p-3 sm:p-4">
+        <h1 className="text-2xl sm:text-3xl font-bold mb-3 sm:mb-4">Oops!</h1>
+        <p className="text-base sm:text-lg mb-3 sm:mb-4">Sorry, an unexpected error has occurred.</p>
+        <p className="text-base sm:text-lg italic">
           <i>{message}</i>
         </p>
       </div>

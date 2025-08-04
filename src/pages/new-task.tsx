@@ -36,14 +36,14 @@ const NewTask: FC = () => {
   const categoryValue = watch('category');
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <div className="bg-white p-6 rounded-xl shadow-[0_0_15px_rgba(0,0,0,0.05)] hover:shadow-[0_0_20px_rgba(0,0,0,0.1)] transition-all duration-300 border border-gray-100">
-        <div className="flex items-center gap-3 mb-6">
-          <div className="h-8 w-1 bg-blue-500 rounded-full" />
-          <h2 className="text-2xl font-bold text-gray-800">Create New Task</h2>
+    <div className="container mx-auto px-2 sm:px-4 py-4 sm:py-8">
+      <div className="bg-white p-4 sm:p-6 rounded-xl shadow-[0_0_15px_rgba(0,0,0,0.05)] hover:shadow-[0_0_20px_rgba(0,0,0,0.1)] transition-all duration-300 border border-gray-100">
+        <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
+          <div className="h-6 sm:h-8 w-1 bg-blue-500 rounded-full" />
+          <h2 className="text-xl sm:text-2xl font-bold text-gray-800">Create New Task</h2>
         </div>
 
-        <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
+        <form className="space-y-4 sm:space-y-6" onSubmit={handleSubmit(onSubmit)}>
           <div className="space-y-2">
             <label className="block text-sm font-medium text-gray-700">Task Name</label>
             <Input
@@ -155,17 +155,17 @@ const NewTask: FC = () => {
             </div>
           </div>
 
-          <div className="flex gap-3 pt-4">
+          <div className="flex flex-col sm:flex-row gap-3 pt-4">
             <Button
               type="submit"
-              className="bg-blue-500 hover:bg-blue-600 text-white shadow-sm hover:shadow-md transition-all duration-200 font-medium px-6"
+              className="bg-blue-500 hover:bg-blue-600 text-white shadow-sm hover:shadow-md transition-all duration-200 font-medium px-6 text-sm sm:text-base w-full sm:w-auto"
             >
               Create Task
             </Button>
             <Button
               type="button"
               variant="outline"
-              className="border-2 border-gray-300 hover:bg-gray-100 shadow-sm hover:shadow-md transition-all duration-200 font-medium"
+              className="border-2 border-gray-300 hover:bg-gray-100 shadow-sm hover:shadow-md transition-all duration-200 font-medium text-sm sm:text-base w-full sm:w-auto"
               onClick={onCancel}
             >
               Cancel

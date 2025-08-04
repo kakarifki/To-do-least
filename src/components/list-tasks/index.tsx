@@ -36,7 +36,11 @@ const TaskList: FC<TaskListProps> = ({ tasks, deleteTask, handleEditTaskStatus }
   );
 
   return (
-    <div className="container mx-auto p-4">
+    <div className="container mx-auto p-2 sm:p-4">
+      <div className="mb-4 flex justify-between items-center">
+        <h1 className="text-xl sm:text-2xl font-bold text-gray-800">Your Tasks</h1>
+        <span className="text-sm text-gray-500">{tasks.length} total tasks</span>
+      </div>
       <TaskRow
         title="To Do"
         tasks={todoTasks}
