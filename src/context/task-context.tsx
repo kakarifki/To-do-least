@@ -19,7 +19,16 @@ export const TaskProvider = ({ children }: { children: React.ReactNode }) => {
     if (storedTasks) {
       return JSON.parse(storedTasks);
     }
-    return initialTasks;
+    // Check if localStorage has a flag indicating first visit
+    const hasVisited = localStorage.getItem('hasVisited');
+    if (!hasVisited) {
+      // Set the flag for future visits
+      localStorage.setItem('hasVisited', 'true');
+      // Return dynamic initial tasks on first visit
+      return initialTasks();
+    }
+    // Return empty array for subsequent visits if no tasks in localStorage
+    return [];
   };
 
   const [tasks, setTasks] = useState<Task[]>(getInitialTasks());
