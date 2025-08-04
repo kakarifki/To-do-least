@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import Layout from '@/components/common/layout';
 import { getRemainingDays } from '@/utils/date-utils';
 
-const TaskDetail: FC = () => {
+export const TaskDetail: FC = () => {
   const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
   const { tasks, deleteTask, handleEditTaskStatus, editTask } = useTasks();
@@ -241,4 +241,10 @@ const TaskDetail: FC = () => {
   );
 };
 
-export default () => <Layout><TaskDetail /></Layout>;
+export default function TaskDetailPage() {
+  return (
+    <Layout>
+      <TaskDetail />
+    </Layout>
+  );
+}
